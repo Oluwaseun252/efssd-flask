@@ -37,6 +37,13 @@ def about():
     # Render HTML with the name in a H1 tag
     return render_template('about.html', title="About EFSSD")
 
+# contact Page
+@app.route('/contact')
+def contact():
+    # Render HTML with the name in a H1 tag
+    return render_template('contact.html', title="contact EFSSD")
+
+
 # Run application
 #=========================================================
 # This code executes when the script is run directly.
