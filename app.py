@@ -4,6 +4,13 @@ from flask import Flask, render_template
 # Create a Flask application instance
 app = Flask(__name__)
 
+# Global variable for site name: Used in templates to display the site name
+siteName = "SHU EFSSD Module"
+# Set the site name in the app context
+@app.context_processor
+def inject_site_name():
+    return dict(siteName=siteName)
+
 # Routes
 #===================
 # These define which template is loaded, or action is taken, depending on the URL requested
@@ -25,11 +32,10 @@ def index():
 #     return f"<h1>About Flask!</h1><p>It is easy to create new routes</p>"
 
 # About Page
-@app.route('/about/<name>')
-def about(name):
+@app.route('/about')
+def about():
     # Render HTML with the name in a H1 tag
-    return f"<h1>About {name}!</h1><p>It is easy to create new routes</p>"
-
+    return render_template('about.html', title="About EFSSD")
 
 # Run application
 #=========================================================
