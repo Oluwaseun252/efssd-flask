@@ -1,3 +1,5 @@
 .venv
+.venvHome
+.venvSHU
 *__pycache__*	 
 
