@@ -138,6 +138,16 @@ def login():
     # If the request method is GET, render the login form
     return render_template('login.html', title="Log In")
 
+# Logout
+@app.route('/logout/')
+def logout():
+    # Clear the session and redirect to the index page with a flash message
+    session.clear()
+    flash(category='info', message='You have been logged out.')
+    return redirect(url_for('index'))
+
+
+
 
 # Films List Page
 @app.route('/films/')

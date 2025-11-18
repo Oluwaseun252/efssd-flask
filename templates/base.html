@@ -28,11 +28,15 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                     <a class="nav-link" href="/about">About</a>
                     <a class="nav-link" href="/contact">Contact</a>
+                    {% if session['user_id'] %}
+                    <a class="nav-link" href="/logout">Logout</a>
+                    {% else %}
                     <a class="nav-link" href="/register">Register</a>
                     <a class="nav-link" href="/login">Login</a>
+                    {% endif %}
+
                 </div>
             </div>
-        </div>
     </nav>
 
     <!--  2 Column Layout  -->
@@ -43,7 +47,7 @@
             <div id="main-content" class="col-md-8">
                 <!-- Flash Messages: This will display any error/success/status messages to the user -->
                 {% for category, message in get_flashed_messages(with_categories=True) %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                <div class="alert alert-{{ category }}">{{ message }}</div>
                 {% endfor %}
 
 
@@ -60,7 +64,7 @@
                 <!-- Sidebar Navigation Links -->
                 <div class="card">
                     <div class="card-header">
-                        Sidebar Card 
+                        Sidebar Card
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">About Us</h5>
@@ -69,9 +73,9 @@
                     </div>
                 </div>
 
-                 <div class="card">
+                <div class="card">
                     <div class="card-header">
-                        Sidebar Card 
+                        Sidebar Card
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">contact Us</h5>
