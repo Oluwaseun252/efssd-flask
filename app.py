@@ -6,6 +6,10 @@ from db.db import *
 
 # Create a Flask application instance
 app = Flask(__name__)
+# Allowed image extensions for uploads
+ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+UPLOADS_PATH = "."
+
 app.secret_key = 'your_secret_key'  # Required for CSRF protection
 csrf = CSRFProtect(app)  # This automatically protects all POST routes
 # Create the csrf_token global variable
@@ -233,9 +237,19 @@ def create():
         watched = True if request.form.get('watched') == 'on' else False
         rating = int(request.form['rating']) if request.form.get('rating') else None
         review = request.form['review']
-        # [TO-DO] Image Upload
-        poster = request.form['poster']  # [TO-DO] Image Upload
 
+        # Handle poster image upload
+        poster = None
+        if 'poster' in request.files:
+            poster_file = request.files['poster']
+            # Check it is an image file and save it
+            if poster_file and poster_file.filename.rsplit('.', 1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS:
+                # Save the file to the static/uploads directory
+                poster_url = f"/static/uploads/{poster_file.filename}"
+                poster_file.save(f".{poster_url}")
+                poster = poster_url  # Use the uploaded file URL in database
+
+        
         # Validate the input
         if not title:
             flash(category='danger', message='Title is required!')

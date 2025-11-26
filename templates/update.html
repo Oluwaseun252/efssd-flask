@@ -42,7 +42,7 @@
             <!--Film poster file upload-->
             <div class="d-flex flex-sm-row align-items-center justify-content-center mt-3 gap-2">
                 <label for="poster">Poster/Image</label>
-                <input name="poster" type="text" accept="image/*" class="form-control" id="poster" placeholder="Film Poster" value="{{ film['poster'] }}">
+                <input name="poster" type="file" accept="image/*" class="form-control" id="poster" placeholder="Film Poster" value="{{ film['poster'] }}">
             </div>
         </div>
         <div class="col-lg-5">
@@ -110,6 +110,19 @@
 
 <!--Sidebar Content -->
 {% block sidebarContent %}
+
+<!-- Film Image -->
+    <div class="card mt-3">
+        <div class="card-body text-center">
+            <h5 class="card-title">Film Poster</h5>
+            {% if not film['poster'] %}
+                <p class="text-muted">No image available</p>
+            {% else %}
+                <img src="{{ film['poster'] }}" class="card-img-top" alt="Image for {{ film['title'] }}">
+            {% endif %}
+        </div>
+    </div>
+
 
     <div class="card mt-3">
         <div class="card-body text-center ">

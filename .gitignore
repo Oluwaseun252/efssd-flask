@@ -1,5 +1,6 @@
 .venv
 .venvHome
 .venvSHU
-*__pycache__*	 
+*__pycache__*	
+static/uploads/* 
 
